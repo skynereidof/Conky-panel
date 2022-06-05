@@ -1,0 +1,87 @@
+# -*- conf -*-
+#
+# ~/.conkyrc – Conky configuration file
+#
+# By Sky Nereid <skynereid.wordpress.com>
+#
+
+background yes
+double_buffer yes
+
+alignment top_right
+
+border_width 1
+cpu_avg_samples 2
+default_color white
+default_outline_color white
+default_shade_color white
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+minimum_size 690 35
+maximum_width 250
+gap_x 0
+gap_y 0
+net_avg_samples 2
+no_buffers yes
+out_to_console no
+out_to_stderr no
+extra_newline no
+
+own_window yes
+own_window_type normal
+own_window_transparent yes
+own_window_colour 000000
+own_window_argb_visual yes
+own_window_argb_value 0
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+
+minimum_size 690 35
+stippled_borders 0
+update_interval 2.0
+uppercase no
+use_spacer none
+
+show_graph_scale no
+show_graph_range no
+
+use_xft yes
+xftalpha 1
+xftfont Droid Sans:size=10
+color0 red
+color1 green
+color2 FFA300
+color3 green
+
+TEXT
+
+${voffset 10}${color1}${font GE Inspira:pixelsize=100}${time %H:%M}${font}${voffset -84}${offset 10}${color FFA300}${font GE Inspira:pixelsize=42}${time %d} ${voffset -15}${color EAEAEA}${font GE Inspira:pixelsize=22}${time %B} ${time %Y}${font}${voffset 24}${font GE Inspira:pixelsize=58}${offset -148}${time %A}${font}
+${color #ddaa00}System $hr
+
+${color green}Fedora Core
+${color green}$sysname ${color green}$kernel (${color green}$machine)
+${color green}Procesy: $processes ${color green}w trakcie: $running_processes
+${color green}Czas pracy: $uptime
+
+${color2}${font Cantarell:size=9}system plików ${color}${fs_type}
+${voffset 10}${color} dostępne aktualizacje: ${color3}${font Cantarell:bold:size=10}${execpi 1800  dnf -q check-update | sed '/^$/d' | wc -l | tail} > updates ─┘   │
+${color}${font} zainstalowane pakiety: ${color2}${execi 10000 pacman -Q | wc -l}
+${color} gałąź: ${color2}${execi 10000 pacman-mirrors -G}
+
+${color #ddaa00}Pogoda $hr
+${alignc}${color green}${font Droid Sans:style=Bold:size=8}${texeci 1200 curl  -s 'https://pl.wttr.in/Radomsko' | sed -n '2,7{s/\d27\[[0-9;]*m//g;s/^..//;s/ *$//;p}'}
+
+${color #ddaa00}Rhythmbox $hr
+${color white smoke}now playing
+  ${color green}${font Segoe UI:size=12}${exec rhythmbox-client --no-start --print-playing-format %tt} ${font Segoe UI:size=10}//${exec rhythmbox-client --no-start --print-playing-format "%aa%st"}  ${color white smoke}${font}${exec rhythmbox-client --no-start --print-playing-format=%te}
+
+${color #ddaa00}CPU / RAM $hr
+${color3}CPU ${color0}${alignr}${cpu cpu0}%
+${color3}RAM ${color0}${alignr}${mem}
+${color #ddaa00}Lan $hr
+${color3}Download ${color0}${alignr}${downspeedf enp8s0} KiB/s
+${color3}Upload ${color0}${alignr}${upspeed enp8s0} KiB/s 
+${color #ddaa00}Wi-Fi $hr
+${color3}Download ${color0}${alignr}${downspeedf wlp9s0} KiB/s
+${color3}Upload ${color0}${alignr}${upspeed wlp9s0} KiB/s 
