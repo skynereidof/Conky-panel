@@ -1,0 +1,72 @@
+# -*- conf -*-
+#
+# ~/.conkyrc – Conky configuration file
+#
+# By Sky Nereid <skynereid.wordpress.com>
+#
+
+
+background yes
+double_buffer yes
+
+alignment bottom_left
+
+border_width 1
+cpu_avg_samples 2
+default_color green
+default_outline_color white
+default_shade_color white
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+
+gap_x 0
+gap_y 0
+net_avg_samples 2
+no_buffers yes
+out_to_console no
+out_to_stderr no
+extra_newline no
+
+own_window yes
+own_window_type normal
+own_window_transparent yes
+own_window_colour 000000
+own_window_argb_visual yes
+own_window_argb_value 0
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+
+minimum_size 300 170
+stippled_borders 0
+update_interval 1.0
+uppercase no
+use_spacer none
+
+show_graph_scale no
+show_graph_range no
+
+use_xft yes
+xftalpha 1
+xftfont Droid Sans:size=12
+color green
+
+
+TEXT
+# --- Get Spotify Cover ---
+${if_running spotify}
+  ${exec ~/.conky/conky-spotify/scripts/cover.sh}
+${endif}
+# --- Show wallpaper and cover ---
+${image ~/.conky/conky-spotify/current/current.jpg -p 2,0 -s 112x112}
+${image ~/.conky/conky-spotify/background.png -p 0,0 -s 482x170}
+# --- Show now playing information ---
+${voffset -114}
+${goto 124}${font Noto Sans:size=7}Title:
+${goto 132}${font GE Inspira:size=14}${exec ~/.conky/conky-spotify/scripts/title.sh}
+${voffset -32}
+${goto 124}${font Noto Sans:size=7}Artist:
+${goto 132}${font GE Inspira:size=14}${exec ~/.conky/conky-spotify/scripts/artist.sh}
+${voffset -32}
+${goto 124}${font Noto Sans:size=7}Album:
+${goto 132}${font GE Inspira:size=14}${exec ~/.conky/conky-spotify/scripts/album.sh}
